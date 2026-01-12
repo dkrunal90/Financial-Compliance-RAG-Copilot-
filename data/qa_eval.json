@@ -1,0 +1,10 @@
+[
+  {
+    "question": "What documents are required for KYC?",
+    "answer": "For KYC (Know Your Customer), the required documents for individual customers are: 1) Government ID such as PAN for India, SSN for US, or Passport, 2) Address proof including utility bill, bank statement, or rental agreement, 3) Recent photograph, and 4) Bank account details."
+  },
+  {
+    "question": "What transactions should be flagged for AML monitoring?",
+    "answer": "For AML (Anti-Money Laundering) monitoring, the following should be flagged: unusually large transactions, rapid movement of funds, and suspicious counterparties."
+  }
+]

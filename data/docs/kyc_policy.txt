@@ -1,0 +1,6 @@
+KYC Policy (Know Your Customer)
+Required documents for individual customers:
+1) Government ID: PAN (India) or SSN (US) or Passport
+2) Address proof: utility bill, bank statement, or rental agreement
+3) Recent photograph
+4) Bank account details

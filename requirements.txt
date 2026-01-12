@@ -1,0 +1,46 @@
+# -------------------------------
+# Core Python ML / NLP
+# -------------------------------
+torch
+transformers
+datasets
+accelerate
+evaluate
+
+# -------------------------------
+# Vector Search & Embeddings
+# -------------------------------
+faiss-cpu
+sentence-transformers
+
+# -------------------------------
+# RAG / Indexing
+# -------------------------------
+llama-index
+llama-index-vector-stores-faiss
+llama-index-embeddings-huggingface
+
+# -------------------------------
+# LangChain + LLM Runtime
+# ------------------------------
+langchain
+langchain-community
+langchain-classic
+langchain-Core
+
+# -------------------------------
+# Evaluation
+# -------------------------------
+sacrebleu
+
+# -------------------------------
+# Utilities
+# -------------------------------
+numpy
+tqdm
+python-dotenv
+
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+streamlit>=1.28.0

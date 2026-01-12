@@ -1,0 +1,23 @@
+# 3. Create proper .gitignore BEFORE adding anything
+cat > .gitignore << 'EOF'
+__pycache__/
+*.py[cod]
+venv/
+env/
+.venv/
+.DS_Store
+*.log
+.env
+.idea/
+.vscode/
+
+# LARGE MODEL FILES - GENERATED LOCALLY
+models/
+indexes/
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.index
+EOF
