@@ -1,0 +1,4 @@
+## 🏗️ Architecture
+
+![System Architecture](docs/architecture-system.png)
+![RAG Pipeline](docs/architecture-rag-pipeline.png)
