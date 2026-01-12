@@ -1,3 +1,4 @@
+<img width="2848" height="1600" alt="image" src="https://github.com/user-attachments/assets/ea16ec64-fdf9-407a-9dfd-b15b70374ead" />
 ***
 
 # 💼 Financial Compliance RAG Copilot  
