@@ -1,4 +1,3 @@
-cat > README.md << 'EOF'
 # 💼 Financial Compliance RAG Copilot
 
 AI-powered assistant for financial compliance queries, combining **Retrieval-Augmented Generation (RAG)** with **Fine-tuned Named Entity Recognition (NER)**.
