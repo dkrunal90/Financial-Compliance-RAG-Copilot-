@@ -1,134 +1,141 @@
-💼 Financial Compliance RAG Copilot
+***
 
-An AI‑powered copilot for financial compliance teams that combines **Retrieval‑Augmented Generation (RAG)** with a **fine‑tuned NER model** to answer policy questions, highlight risky entities, and evaluate answer quality.[1]
+# 💼 Financial Compliance RAG Copilot  
+*Your AI teammate for “Where exactly does the policy say that?” moments.*[1]
+
+Financial Compliance RAG Copilot turns dry policy PDFs into an interactive assistant that can **answer questions, spot risky entities, and grade its own answers** using RAG + NER + evaluation in one stack.[1]
 
 ***
 
-## 🎯 What this copilot can do
+## 🧩 What this copilot actually does
 
-- **Ask policy questions in plain English**  
-  RAG‑based Q&A over your internal compliance corpus using **LlamaIndex + FAISS + Llama 3** via Ollama.[1]
+- 🔍 **Reads your policies for you**  
+  Ask natural‑language questions and get grounded answers powered by **LlamaIndex + FAISS + Llama 3** via Ollama.[1]
 
-- **Spot critical financial entities instantly**  
-  Fine‑tuned **DistilBERT** NER to tag PERSON, ORG, ACCOUNT_NUMBER and other sensitive fields from raw text or chat input.[1]
+- 🕵️ **Highlights who did what, where**  
+  A fine‑tuned **DistilBERT** model tags PERSON, ORG, ACCOUNT_NUMBER and other sensitive entities directly from raw text.[1]
 
-- **Measure answer quality, not just vibes**  
-  BLEU‑based evaluation against gold Q&A pairs so you can track how good the assistant really is over time.[1]
+- 📏 **Checks its own work**  
+  BLEU‑based evaluation against gold Q&A pairs so you can track quality instead of trusting vibes.[1]
 
-- **Use it however you like**  
-  - Interactive **CLI** for power users  
-  - **FastAPI REST API** for backend integration  
-  - **Streamlit Web UI** for analysts and reviewers[1]
+- 🧑‍💻 **Meets you where you are**  
+  - Terminal lover? Use the **CLI chat**.  
+  - Building products? Plug into the **FastAPI REST API**.  
+  - Analyst or reviewer? Open the **Streamlit Web UI** and just type.[1]
 
 ***
 
-## 🚀 Quick start in 4 steps
+## ⚡ 5‑minute launch
 
-### 1️⃣ Clone and environment
+### 1️⃣ Grab the repo and set up Python
 
 ```bash
 git clone https://github.com/dkrunal90/Financial-Compliance-RAG-Copilot-.git
 cd Financial-Compliance-RAG-Copilot-
 
-# Create virtual environment
 conda create -p venv python=3.10
 conda activate ./venv
 
-# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 2️⃣ Install Ollama + LLM
+### 2️⃣ Give it a brain (Ollama + Llama 3.2)
 
 ```bash
-# Install from https://ollama.ai
+# Install Ollama from https://ollama.ai
 ollama pull llama3.2
 ```
 
-### 3️⃣ Prepare data and models
+### 3️⃣ Teach it your world
 
 ```bash
-# Generate synthetic compliance Q&A + NER data
+# 1) Create synthetic compliance Q&A + NER data
 python src/create_sample_data.py
 
-# Fine-tune DistilBERT for financial NER (~5 minutes)
+# 2) Fine-tune DistilBERT for financial NER (~5 minutes)
 python src/ner_train.py
 
-# Build FAISS vector index for RAG
+# 3) Build FAISS vector index over your policy corpus
 python src/ingest_index.py
 ```
 
-### 4️⃣ Run your copilot
+### 4️⃣ Start talking to it
 
 ```bash
-# Interactive CLI
+# CLI chat
 python src/chat_cli.py
 
 # REST API
 python src/api.py
 
-# Web UI
+# Streamlit web app
 streamlit run src/app_streamlit.py
 ```
 
+Now you have a local “compliance Copilot” that understands your documents.[1]
+
 ***
 
-## 📊 What using it looks like
+## 🧪 What it feels like
 
-### 💬 Chat over policies (CLI)
+### 💬 Chatting with policies (CLI)
 
 ```text
 You: ask What documents are required for KYC?
 
-Assistant:
+Copilot:
 For KYC, you typically need:
 1. Government ID (PAN/SSN/Passport)
 2. Address proof
 3. Recent photograph
 4. Bank account details
 
-[Answer grounded in retrieved compliance documents]
+[Answer grounded in internal KYC policy sections]
 ```
 
-### 🧾 Financial NER extraction
+### 🧾 Instant entity spotlight (NER)
 
 ```text
 You: ner Rahul transferred money to HDFC account 1234567890
 
-Extracted Entities:
+Entities:
  • Rahul        → PERSON
  • HDFC         → ORG
  • 1234567890   → ACCOUNT_NUMBER
 ```
 
+Use it to quickly scan suspicious notes, chats, or transaction descriptions.[1]
+
 ***
 
-## 🐳 One‑command Docker deploy
+## 🐳 Ship it with one command
+
+Want it running like a service instead of a script?
 
 ```bash
 docker-compose up -d
 ```
 
-This spins up the FastAPI backend and supporting services defined in `docker-compose.yml` so you can use the API and UI without manual setup.[1]
+`docker-compose.yml` wires up the app, so you get the API + UI in containers with minimal fuss.[1]
 
 ***
 
-## 📂 Project layout
+## 🧱 Under the hood (for engineers)
 
 ```text
 ├── src/
-│   ├── create_sample_data.py   # Generate synthetic training data
-│   ├── ner_train.py            # Fine-tune DistilBERT for NER
-│   ├── ner_infer.py            # NER inference utilities
-│   ├── ingest_index.py         # Build FAISS vector index for RAG
-│   ├── rag_chain.py            # RAG orchestration with LlamaIndex
-│   ├── evaluate_bleu.py        # BLEU-based answer evaluation
-│   ├── chat_cli.py             # CLI entrypoint
-│   ├── api.py                  # FastAPI REST service
-│   └── app_streamlit.py        # Streamlit web UI
+│   ├── create_sample_data.py   # Synthetic Q&A + NER training data
+│   ├── ner_train.py            # Fine-tune DistilBERT for financial NER
+│   ├── ner_infer.py            # NER inference helpers
+│   ├── ingest_index.py         # Build FAISS vector index
+│   ├── rag_chain.py            # LlamaIndex RAG pipeline
+│   ├── evaluate_bleu.py        # BLEU scoring for answers
+│   ├── chat_cli.py             # CLI interface
+│   ├── api.py                  # FastAPI REST backend
+│   └── app_streamlit.py        # Streamlit dashboard
 ├── data/                       # Generated sample data
-├── models/                     # Trained NER / saved checkpoints
-├── indexes/                    # Vector indexes (FAISS)
+├── models/                     # Trained NER checkpoints
+├── indexes/                    # FAISS indexes
 ├── requirements.txt
 ├── Dockerfile
 └── docker-compose.yml
@@ -137,20 +144,26 @@ This spins up the FastAPI backend and supporting services defined in `docker-com
 
 ***
 
-## 🔧 Under the hood
+## 🛠️ Tech stack at a glance
 
-- **NER**: DistilBERT (HuggingFace), fine‑tuned for financial entities.[1]
-- **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2` for dense semantic search.[1]
-- **Vector store**: FAISS for fast similarity search over compliance chunks.[1]
-- **RAG orchestration**: LlamaIndex to wire loaders, index, retriever, and LLM together.[1]
-- **LLM**: Llama 3.2 served locally via Ollama for low‑latency, private inference.[1]
+- 🧠 **NER**: DistilBERT (HuggingFace), fine‑tuned for financial entities.[1]
+- 🔡 **Embeddings**: `sentence-transformers/all-MiniLM-L6-v2` for semantic search across policy chunks.[1]
+- 📚 **Vector store**: FAISS for fast similarity search.  
+- 🔗 **RAG orchestration**: LlamaIndex to connect loaders, index, retriever, and LLM.  
+- 🤖 **LLM**: Llama 3.2 served locally via Ollama.  
+- 🌐 **APIs & UI**: FastAPI + Streamlit.[1]
 
 ***
 
-## 📝 License & 🤝 Contributions
+## 📜 License & 💡 How to contribute
 
-- Licensed under **MIT** – use it, tweak it, ship it.[1]
-- Pull requests are very welcome: new entity types, better evaluation metrics, or production hardening (auth, logging, tracing) are all great places to contribute.[1]
+- Licensed under **MIT** – feel free to fork, extend, and integrate.[1]
+- Ideas for great PRs:  
+  - New entity types (e.g., TAX_ID, CARD_NUMBER, SWIFT).  
+  - Extra evaluation metrics (e.g., ROUGE, human feedback logging).  
+  - Production features: auth, rate limiting, structured logging, OpenTelemetry.[1]
+
+If you share your GitHub link later, this can be tuned even more as a portfolio‑style README specifically for hiring managers.
 
 [1](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/30658921/9063d921-4282-4257-9b0a-5065eca98c3c/README-2.md)
 [2](https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/attachments/30658921/230e3302-67ef-4e82-aea8-a604a64ca6ce/Krunal-Desai_AI-ML-Engineer.pdf)
